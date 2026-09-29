@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida | Mi Primer Proyecto</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 200% 200%;
+      animation: fondo 12s ease infinite;
+      color: #2d2d44;
+    }
+
+    @keyframes fondo {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .tarjeta {
+      width: 100%;
+      max-width: 480px;
+      padding: 48px 32px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+      animation: aparecer 0.8s ease-out;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      font-size: 64px;
+      display: inline-block;
+      animation: saludar 2s ease-in-out infinite;
+      transform-origin: 70% 70%;
+    }
+
+    @keyframes saludar {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+    }
+
+    h1 {
+      margin-top: 16px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #5a5a72;
+    }
+
+    button {
+      margin-top: 32px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(118, 75, 162, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    #mensaje {
+      margin-top: 24px;
+      min-height: 1.5em;
+      font-weight: 600;
+      color: #764ba2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #mensaje.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <main class="tarjeta">
+    <span class="emoji" aria-hidden="true">👋</span>
+    <h1>¡Hola Mundo desde mi cuenta!</h1>
+    <p>Bienvenido a mi primer proyecto. Me alegra que estés aquí.</p>
+    <button id="boton" type="button">¡Haz clic aquí!</button>
+    <div id="mensaje" aria-live="polite"></div>
+  </main>
+
+  <script>
+    const mensajes = [
+      "¡Gracias por visitar! 🎉",
+      "¡Sigue explorando! 🚀",
+      "¡Eres increíble! ✨",
+      "¡Que tengas un gran día! ☀️",
+      "¡A programar se ha dicho! 💻"
+    ];
+
+    const boton = document.getElementById("boton");
+    const mensaje = document.getElementById("mensaje");
+    let clics = 0;
+
+    boton.addEventListener("click", () => {
+      clics++;
+      mensaje.classList.remove("visible");
+      setTimeout(() => {
+        const texto = mensajes[Math.floor(Math.random() * mensajes.length)];
+        mensaje.textContent = `${texto} (Clics: ${clics})`;
+        mensaje.classList.add("visible");
+      }, 150);
+    });
+  </script>
+</body>
+</html>
